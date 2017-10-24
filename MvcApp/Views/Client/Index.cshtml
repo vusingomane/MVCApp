@@ -1,0 +1,40 @@
+﻿@model IEnumerable<MvcApp.Models.Client>
+
+@{ViewBag.Title = "Index"; } 
+
+<div align = "center" >  
+    <h3> Client Management </h3> 
+   
+    <br / >  
+    <br / >
+  <div  class="table-responsive" style=" width:700px">   
+    <table class="table" style=" width:700px"> 
+      <thead class="blue-grey lighten-4"> 
+      <tr >  
+          <th>First Name</th>
+          <th>Surname </th>
+          <th>IdentityType </th>
+          <th>IdentityNumber </th>
+          <th>DateOfBirth </th>
+          <th>Action </th>
+      </tr> 
+     </thead>   
+           @foreach(var client in Model) 
+            { 
+                <tr>  
+                    <td> @client.FirstNames </td>
+                    <td> @client.Surname </td>
+                    <td> @client.IdentityType </td>
+                    <td> @client.IdentityNumber </td>
+                    <td> @client.DateOfBirth </td>
+                    <td>  
+                        <a href = "@Url.Action("EditClient","Client", new { @ClientId = client.Id })" class ="btn btn-xs btn-primary" > 
+                            <i class="glyphicon glyphicon-edit"></i> edit </a> 
+                    </td>
+                </tr>  
+           } 
+
+   </table>
+ </div>
+</div>  
+

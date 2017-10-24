@@ -1,0 +1,69 @@
+﻿@model MvcApp.Models.Client
+<link href="~/Content/bootstrap.min.css" rel="stylesheet">
+<script src="~/Scripts/jquery-1.9.1.min.js"></script>
+<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="~/Scripts/bootstrap-datepicker.js"></script>
+<link href="~/Content/bootstrap-datepicker.css" rel="stylesheet" />
+
+
+
+@{  ViewBag.Title = "AddClient";  }  
+
+  
+<div align = "center" >  
+    <h3> Client Management </h3> <br / >  
+    <b> Edit Client </b> <br / >  
+    <br / >  
+  
+    @using (Html.BeginForm("EditClient", "Client", FormMethod.Post, new { id = Model.Id })) 
+    {
+        @Html.HiddenFor(model => model.Id)
+        <table>  
+            <tr>  
+                <td colspan = "2" >  
+                @if(ViewBag.Failed != null) 
+                 { 
+                    <span style = "color:red;" > @ViewBag.Failed </span>  
+                } </td> 
+            </tr>
+            <tr>  
+                <td> @Html.LabelFor(e => e.FirstNames,new { @class = "control-label", style = "width: 140px;" }) </td>
+                <td> <div class="controls">@Html.TextBoxFor(e => e.FirstNames, new {style = "width: 220px;"}) </div><br/>  @Html.ValidationMessageFor(e => e.FirstNames, null, new { style = "color:red;" })</td>
+            </tr> 
+            <tr>  
+                <td> @Html.LabelFor(e => e.Surname, new { @class = "control-label" , style = "width: 140px;"}) </td> 
+                <td> <div class="controls"> @Html.TextBoxFor(e => e.Surname, new {style = "width: 220px;"}) </div><br /> @Html.ValidationMessageFor(e => e.Surname, null, new { style = "color:red;" }) </td>
+            </tr>
+             <tr>  
+                <td> @Html.LabelFor(e => e.IdentityType, new { @class = "control-label", style = "width: 140px;" }) </td> 
+                  <td>
+                    <div class="controls"> 
+                      @Html.DropDownListFor(m => m.IdentityType, new List<SelectListItem> { new SelectListItem { Text = "IdentityDocument", Value = "IdentityDocument" }, new SelectListItem { Text = "Passport", Value = "Passport" } }, "Please select", new { style = "width: 220px;"})
+                      @Html.ValidationMessageFor(e => e.IdentityType, null, new { style = "color:red;" })
+                    </div>
+                </td>
+            </tr>
+             <tr>  
+                <td> @Html.LabelFor(e => e.IdentityNumber, new { @class = "control-label" , style = "width: 140px;"}) </td> 
+                <td> <div class="controls"> @Html.TextBoxFor(e => e.IdentityNumber , new {style = "width: 220px;"}) </div><br /> @Html.ValidationMessageFor(e => e.IdentityNumber, null, new { style = "color:red;" }) </td>
+            </tr>
+            <tr>
+               <td> @Html.LabelFor(e => e.DateOfBirth, new { @class = "control-label", style = "width: 140px;" }) </td> 
+              <td>
+                 <div class="form-group">
+                  <div class="col-md-20">
+                   <div class="input-group" id="datetimepicker" > @Html.EditorFor(model => model.DateOfBirth, new { htmlAttributes = new { @class = "form-control" } }) </div> @Html.ValidationMessageFor(e => e.DateOfBirth, null, new { style = "color:red;" })</div>
+                 </div>
+                </td>          
+            <tr> 
+                <td colspan = "2" align = "center" >  <br/>  <input type = "submit" value = "Submit" class ="btn btn-xs btn-primary"  / > </td>
+          </tr> 
+       </table>  
+    } 
+</div> 
+<script type="text/javascript">
+    $(function () { // will trigger when the document is ready
+        $('.datepicker').datepicker(); //Initialise any date pickers
+    });
+</script> 
+
